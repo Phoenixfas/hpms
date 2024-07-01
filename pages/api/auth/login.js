@@ -2,8 +2,9 @@ import bcrypt from 'bcryptjs';
 import User from '../../../models/User';
 import { generateToken } from '../../../utils/auth';
 import connectDB from '../../../utils/db';
+import corsMiddleware from '../../../utils/corsMiddleware';
 
-export default async function handler(req, res) {
+const handler = async (req, res) => {
   await connectDB();
   
   if (req.method === 'POST') {
@@ -25,3 +26,5 @@ export default async function handler(req, res) {
     res.status(405).json({ message: 'Method not allowed' });
   }
 }
+
+export default corsMiddleware(handler);
