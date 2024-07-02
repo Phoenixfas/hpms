@@ -26,7 +26,7 @@ export default function TopSection({path, title, desc}: any) {
             </div> */}
             <div className='p-4 h-[40px] bg-[#04353D] hover:bg-white hover:text-[#45B1BE] text-white duration-300 cursor-pointer flex items-center gap-3 rounded-full' onClick={() => dispatch(toggleBlogAddModal())}>
                 <AiFillFileAdd className='text-2xl' />
-                <p className='text-sm font-light'>Add Documents</p>
+                <p className='text-sm font-light'>Add Appointment</p>
             </div>
         </div>
     </div>

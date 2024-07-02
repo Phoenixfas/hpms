@@ -27,19 +27,18 @@ export default function EditBlogModal() {
     const [patient, setPatient] = useState("")
     const [doctor, setADoctor] = useState("")
     const [notes, setNotes] = useState("")
-    const [diagnosis, setDiagnosis] = useState("")
-    const [treatmentPlan, setTreatmentPlan] = useState("")
-    const [labResults, setLabResults] = useState("")
+    const [date, setDate] = useState("")
+    
 
     const token = useAppSelector(state => state.login.admin)
     const addArticle = async (body: any) => {
-        await postReq('clinical-documents', body, token)
+        await postReq('appointments', body, token)
         window.location.reload()
     }
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if(patient === "" || doctor === "" || notes === "" || diagnosis === "" || treatmentPlan === "" || labResults === "") {
+        if(patient === "" || doctor === "" || notes === "" || date === "") {
             setErr("Please fill in all fields")
             return
         }
@@ -50,16 +49,12 @@ export default function EditBlogModal() {
             patient,
             doctor,
             notes,
-            diagnosis,
-            treatmentPlan,
-            labResults
+            date,
         })
         setPatient("")
         setADoctor("")
         setNotes("")
-        setDiagnosis("")
-        setTreatmentPlan("")
-        setLabResults("")
+        setDate("")
         dispatch(toggleBlogAddModal())
     }
 
@@ -77,7 +72,7 @@ export default function EditBlogModal() {
                         <GrClose />
                     </div>
                     <div className=' w-full'>
-                        <h1 className='text-3xl font-bold text-center mb-10'>Add New Document</h1>
+                        <h1 className='text-3xl font-bold text-center mb-10'>Add New Appointment</h1>
                         {err && <p className="text-red-500 text-center mb-5">{err}</p>}
                         <form onSubmit={onSubmit} className="flex flex-col">
                             <div className="w-full flex flex-col mb-5">
@@ -85,7 +80,7 @@ export default function EditBlogModal() {
                                 <input placeholder="Enter Patient id" required type="text" className="p-3 pl-0 text-md border-b-2 border-gray-300 focus:border-[#489b42] duration-300 outline-none" id="name" value={patient} onChange={(e)=> setPatient(e.target.value)} />
                             </div>
                             <div className="w-full flex flex-col mb-5">
-                                <label>Doctor</label>
+                                <label>Doctor Id</label>
                                 <input placeholder="Enter Doctor" required type="text" className="p-3 pl-0 text-md border-b-2 border-gray-300 focus:border-[#489b42] duration-300 outline-none" id="name" value={doctor} onChange={(e)=> setADoctor(e.target.value)} />
                             </div>
                             <div className="w-full flex flex-col mb-5">
@@ -93,18 +88,10 @@ export default function EditBlogModal() {
                                 <textarea placeholder="Enter Notes" required className="p-3 pl-0 text-md border-2 border-gray-300 focus:border-[#489b42] duration-300 outline-none" id="name" value={notes} onChange={(e)=> setNotes(e.target.value)} />
                             </div>
                             <div className="w-full flex flex-col mb-5">
-                                <label>Diagnosis</label>
-                                <textarea placeholder="Enter Diagnosis" required className="p-3 pl-0 text-md border-2 border-gray-300 focus:border-[#489b42] duration-300 outline-none" id="name" value={diagnosis} onChange={(e)=> setDiagnosis(e.target.value)} />
+                                <label>Date</label>
+                                <input placeholder="Enter Date" required type="date" className="p-3 pl-0 text-md border-b-2 border-gray-300 focus:border-[#489b42] duration-300 outline-none" id="name" value={date} onChange={(e)=> setDate(e.target.value)} />
                             </div>
-                            <div className="w-full flex flex-col mb-5">
-                                <label>Treatment Plan</label>
-                                <textarea placeholder="Enter Treatment Plan" required className="p-3 pl-0 text-md border-2 border-gray-300 focus:border-[#489b42] duration-300 outline-none" id="name" value={treatmentPlan} onChange={(e)=> setTreatmentPlan(e.target.value)} />
-                            </div>
-                            <div className="w-full flex flex-col mb-5">
-                                <label>Lab Results</label>
-                                <textarea placeholder="Enter Lab Results" required className="p-3 pl-0 text-md border-2 border-gray-300 focus:border-[#489b42] duration-300 outline-none" id="name" value={labResults} onChange={(e)=> setLabResults(e.target.value)} />
-                            </div>
-                            <button type='submit' className="px-5 py-2 bg-green-500 text-lg font-light w-fit self-end mt-10 cursor-pointer text-white rounded-md flex items-center gap-3"><FaPlus /> ADD DOCUMENT</button>
+                            <button type='submit' className="px-5 py-2 bg-green-500 text-lg font-light w-fit self-end mt-10 cursor-pointer text-white rounded-md flex items-center gap-3"><FaPlus /> ADD APPOINTMENT</button>
                             {/* <Link target="_blank" className="self-end text-green-500 mt-8" href="https://www.markdownguide.org/cheat-sheet/">Markdown Guide</Link> */}
                         </form>
                     </div>

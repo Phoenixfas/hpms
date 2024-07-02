@@ -60,6 +60,12 @@ export default function Blogs_Subs() {
                 <div className="text-2xl text-gray-600 text-center font-light">Appointments</div>
             </div>
         </Link>
+        <Link href='/clinical-documents' className='flex-1' title='newsletter'>
+            <div className="min-w-72  h-40 p-5 rounded-xl bg-white gap-3 hover:shadow-xl flex flex-col items-center justify-center">
+                <div className="text-6xl text-[#04353D] font-bold">{clinicalDocuments}</div>
+                <div className="text-2xl text-gray-600 text-center font-light">Documents</div>
+            </div>
+        </Link>
     </div>
   )
 }

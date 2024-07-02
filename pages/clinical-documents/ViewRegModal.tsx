@@ -45,7 +45,7 @@ export default function ViewRegModal({path}: any) {
         const data = await deleteReq('clinical-documents', id, token)
         console.log(data)
         dispatch(toggleRegModal())
-        // window.location.reload()
+        window.location.reload()
     }
 
     // console.log(regData)
