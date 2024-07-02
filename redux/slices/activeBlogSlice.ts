@@ -4,23 +4,23 @@ import { RootState } from "../store";
 // define blog state as an object with title, image, desc, content, and date
 export interface Blog {
     _id: any;
-    title: string;
-    image: string;
-    snippet: string;
-    markdown: string;
-    sanitizedHtml: string;
+    patient: {};
+    doctor: {};
     date: string;
+    notes: string;
+    createdAt: string;
+    updatedAt: string;
 }
 
 // define initial state
 const initialState: Blog = {
     _id: "",
-    title: "",
-    image: "",
-    snippet: "",
-    markdown: "",
-    sanitizedHtml: "",
+    patient: {},
+    doctor: {},
     date: "",
+    notes: "",
+    createdAt: "",
+    updatedAt: "",
 };
 
 // create slice
@@ -33,12 +33,12 @@ export const activeBlogSlice = createSlice({
         // @ts-ignore
         changeActiveBlog: (state, action: PayloadAction<Blog>) => {
             state._id = action.payload._id;
-            state.title = action.payload.title;
-            state.image = action.payload.image;
-            state.snippet = action.payload.snippet;
-            state.markdown = action.payload.markdown;
-            state.sanitizedHtml = action.payload.sanitizedHtml;
+            state.patient = action.payload.patient;
+            state.doctor = action.payload.doctor;
+            state.notes = action.payload.notes;
             state.date = action.payload.date;
+            state.createdAt = action.payload.createdAt;
+            state.updatedAt = action.payload.updatedAt;
         },
     },
 });

@@ -19,7 +19,7 @@ const variants = {
 export default function ViewRegModal({path}: any) {
     const dispatch = useAppDispatch()
     const regModalToggle = useAppSelector(state => state.regModalToggle.value)
-    const regData = useAppSelector(state => state.activePackage)
+    const regData = useAppSelector(state => state.activeBlog)
 
     const token = useAppSelector((state) => state.login.admin)
 
@@ -42,7 +42,7 @@ export default function ViewRegModal({path}: any) {
     }
 
     const deleteReg = async (id: any) => {
-        const data = await deleteReq('clinical-documents', id, token)
+        const data = await deleteReq('appointments', id, token)
         console.log(data)
         dispatch(toggleRegModal())
         // window.location.reload()
@@ -71,16 +71,12 @@ export default function ViewRegModal({path}: any) {
                     <div className='text-xl font-light text-black '>{regData.doctor?.username}</div>
                   </div>
                   <div className='flex  flex-wrap gap-1 mb-4 flex-col'>
+                    <div className='text-xl font-bold text-black'>Date</div>
+                    <div className='text-xl font-light text-black '>{regData.date}</div>
+                  </div>
+                  <div className='flex  flex-wrap gap-1 mb-4 flex-col'>
                     <div className='text-xl font-bold text-black'>Notes</div>
                     <div className='text-xl font-light text-black '>{regData.notes}</div>
-                  </div>
-                  <div className='flex  flex-wrap gap-1 mb-4 flex-col'>
-                    <div className='text-xl font-bold text-black'>Diagnosis</div>
-                    <div className='text-xl font-light text-black '>{regData.diagnosis}</div>
-                  </div>
-                  <div className='flex  flex-wrap gap-1 mb-4 flex-col'>
-                    <div className='text-xl font-bold text-black'>Treatment Plan</div>
-                    <div className='text-xl font-light text-black '>{regData.treatmentPlan}</div>
                   </div>
 
                 </div>
@@ -89,7 +85,7 @@ export default function ViewRegModal({path}: any) {
                 }} ><FaRegCheckCircle /> APPROVE Vendor</button>} */}
                 <button className="px-5 py-2 bg-red-500 text-lg font-light w-fit self-end mt-10 cursor-pointer text-white rounded-md flex items-center gap-3" onClick={() => {
                   deleteReg(regData._id)
-                }} ><FaTrash />DELETE DOCUMENT</button>
+                }} ><FaTrash />DELETE Appointment</button>
               </motion.div>
             </motion.div>
         )}
