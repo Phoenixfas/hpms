@@ -19,7 +19,7 @@ const variants = {
 export default function ViewRegModal({path}: any) {
     const dispatch = useAppDispatch()
     const regModalToggle = useAppSelector(state => state.regModalToggle.value)
-    const regData = useAppSelector(state => state.activeSpeaker)
+    const regData = useAppSelector(state => state.activePackage)
 
     const token = useAppSelector((state) => state.login.admin)
 
@@ -42,7 +42,7 @@ export default function ViewRegModal({path}: any) {
     }
 
     const deleteReg = async (id: any) => {
-        const data = await deleteReq('patients', id, token)
+        const data = await deleteReq('clinical-documents', id, token)
         console.log(data)
         dispatch(toggleRegModal())
         // window.location.reload()
@@ -61,24 +61,24 @@ export default function ViewRegModal({path}: any) {
                 </div>
                 <div className=' w-full'>
                   <div className='flex  flex-wrap gap-1 mb-4 flex-col'>
-                    <div className='text-xl font-bold text-black'>Name</div>
-                    <div className='text-xl font-light text-black '>{regData.name}</div>
+                    <div className='text-xl font-bold text-black'>Patient Name</div>
+                    <div className='text-xl font-light text-black '>{regData.patient?.name}</div>
                   </div>
                   <div className='flex  flex-wrap gap-1 mb-4 flex-col'>
-                    <div className='text-xl font-bold text-black'>Age</div>
-                    <div className='text-xl font-light text-black '>{regData.age}</div>
+                    <div className='text-xl font-bold text-black'>Doctor Name</div>
+                    <div className='text-xl font-light text-black '>{regData.doctor?.username}</div>
                   </div>
                   <div className='flex  flex-wrap gap-1 mb-4 flex-col'>
-                    <div className='text-xl font-bold text-black'>Gender</div>
-                    <div className='text-xl font-light text-black '>{regData.gender}</div>
+                    <div className='text-xl font-bold text-black'>Notes</div>
+                    <div className='text-xl font-light text-black '>{regData.notes}</div>
                   </div>
                   <div className='flex  flex-wrap gap-1 mb-4 flex-col'>
-                    <div className='text-xl font-bold text-black'>Medical History</div>
-                    <div className='text-xl font-light text-black '>{regData.medicalHistory}</div>
+                    <div className='text-xl font-bold text-black'>Diagnosis</div>
+                    <div className='text-xl font-light text-black '>{regData.diagnosis}</div>
                   </div>
                   <div className='flex  flex-wrap gap-1 mb-4 flex-col'>
-                    <div className='text-xl font-bold text-black'>Insurance Info</div>
-                    <div className='text-xl font-light text-black '>{regData.insuranceInfo}</div>
+                    <div className='text-xl font-bold text-black'>Treatment Plan</div>
+                    <div className='text-xl font-light text-black '>{regData.treatmentPlan}</div>
                   </div>
 
                 </div>
@@ -87,7 +87,7 @@ export default function ViewRegModal({path}: any) {
                 }} ><FaRegCheckCircle /> APPROVE Vendor</button>} */}
                 <button className="px-5 py-2 bg-red-500 text-lg font-light w-fit self-end mt-10 cursor-pointer text-white rounded-md flex items-center gap-3" onClick={() => {
                   deleteReg(regData._id)
-                }} ><FaTrash />DELETE Patient</button>
+                }} ><FaTrash />DELETE DOCUMENT</button>
               </motion.div>
             </motion.div>
         )}

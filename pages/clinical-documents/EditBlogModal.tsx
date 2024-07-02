@@ -24,21 +24,22 @@ export default function EditBlogModal() {
 
     const [err, setErr] = useState<any>("")
 
-    const [name, setName] = useState("")
-    const [age, setAge] = useState("")
-    const [gender, setGender] = useState("")
-    const [medicalHistory, setMedicalHistory] = useState("")
-    const [insuranceInfo, setInsuranceInfo] = useState("")
+    const [patient, setPatient] = useState("")
+    const [doctor, setADoctor] = useState("")
+    const [notes, setNotes] = useState("")
+    const [diagnosis, setDiagnosis] = useState("")
+    const [treatmentPlan, setTreatmentPlan] = useState("")
+    const [labResults, setLabResults] = useState("")
 
     const token = useAppSelector(state => state.login.admin)
     const addArticle = async (body: any) => {
-        await postReq('patients', body, token)
+        await postReq('clinical-documents', body, token)
         window.location.reload()
     }
 
     const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if(name === "" || age === "" || gender === "" || medicalHistory === "" || insuranceInfo === "") {
+        if(patient === "" || doctor === "" || notes === "" || diagnosis === "" || treatmentPlan === "" || labResults === "") {
             setErr("Please fill in all fields")
             return
         }
@@ -46,17 +47,19 @@ export default function EditBlogModal() {
 
         setErr("")
         await addArticle({
-            name,
-            age,
-            gender,
-            medicalHistory,
-            insuranceInfo
+            patient,
+            doctor,
+            notes,
+            diagnosis,
+            treatmentPlan,
+            labResults
         })
-        setName("")
-        setAge("")
-        setGender("")
-        setMedicalHistory("")
-        setInsuranceInfo("")
+        setPatient("")
+        setADoctor("")
+        setNotes("")
+        setDiagnosis("")
+        setTreatmentPlan("")
+        setLabResults("")
         dispatch(toggleBlogAddModal())
     }
 
@@ -74,30 +77,34 @@ export default function EditBlogModal() {
                         <GrClose />
                     </div>
                     <div className=' w-full'>
-                        <h1 className='text-3xl font-bold text-center mb-10'>Add New Patient</h1>
+                        <h1 className='text-3xl font-bold text-center mb-10'>Add New Document</h1>
                         {err && <p className="text-red-500 text-center mb-5">{err}</p>}
                         <form onSubmit={onSubmit} className="flex flex-col">
                             <div className="w-full flex flex-col mb-5">
-                                <label>Name</label>
-                                <input placeholder="Enter Name" required type="text" className="p-3 pl-0 text-md border-b-2 border-gray-300 focus:border-[#489b42] duration-300 outline-none" id="name" value={name} onChange={(e)=> setName(e.target.value)} />
+                                <label>Patient Id</label>
+                                <input placeholder="Enter Patient id" required type="text" className="p-3 pl-0 text-md border-b-2 border-gray-300 focus:border-[#489b42] duration-300 outline-none" id="name" value={patient} onChange={(e)=> setPatient(e.target.value)} />
                             </div>
                             <div className="w-full flex flex-col mb-5">
-                                <label>Age</label>
-                                <input placeholder="Enter Age" type="text" className="p-3 pl-0 text-md border-b-2 border-gray-300 focus:border-[#489b42] duration-300 outline-none" id="age" value={age} onChange={(e)=> setAge(e.target.value)} />
+                                <label>Doctor</label>
+                                <input placeholder="Enter Doctor" required type="text" className="p-3 pl-0 text-md border-b-2 border-gray-300 focus:border-[#489b42] duration-300 outline-none" id="name" value={doctor} onChange={(e)=> setADoctor(e.target.value)} />
                             </div>
                             <div className="w-full flex flex-col mb-5">
-                                <label>Gender</label>
-                                <input placeholder="Enter Gender" type="text" className="p-3 pl-0 text-md border-b-2 border-gray-300 focus:border-[#489b42] duration-300 outline-none" id="gender" value={gender} onChange={(e)=> setGender(e.target.value)} />
+                                <label>Notes</label>
+                                <textarea placeholder="Enter Notes" required className="p-3 pl-0 text-md border-2 border-gray-300 focus:border-[#489b42] duration-300 outline-none" id="name" value={notes} onChange={(e)=> setNotes(e.target.value)} />
                             </div>
                             <div className="w-full flex flex-col mb-5">
-                                <label>Medical History</label>
-                                <input placeholder="Enter Medical History" type="text" className="p-3 pl-0 text-md border-b-2 border-gray-300 focus:border-[#489b42] duration-300 outline-none" id="medical history" value={medicalHistory} onChange={(e)=> setMedicalHistory(e.target.value)} />
+                                <label>Diagnosis</label>
+                                <textarea placeholder="Enter Diagnosis" required className="p-3 pl-0 text-md border-2 border-gray-300 focus:border-[#489b42] duration-300 outline-none" id="name" value={diagnosis} onChange={(e)=> setDiagnosis(e.target.value)} />
                             </div>
                             <div className="w-full flex flex-col mb-5">
-                                <label>Insurance Info</label>
-                                <input placeholder="Enter Insurance Info" type="text" className="p-3 pl-0 text-md border-b-2 border-gray-300 focus:border-[#489b42] duration-300 outline-none" id="insuranceInfo" value={insuranceInfo} onChange={(e)=> setInsuranceInfo(e.target.value)} />
+                                <label>Treatment Plan</label>
+                                <textarea placeholder="Enter Treatment Plan" required className="p-3 pl-0 text-md border-2 border-gray-300 focus:border-[#489b42] duration-300 outline-none" id="name" value={treatmentPlan} onChange={(e)=> setTreatmentPlan(e.target.value)} />
                             </div>
-                            <button type='submit' className="px-5 py-2 bg-green-500 text-lg font-light w-fit self-end mt-10 cursor-pointer text-white rounded-md flex items-center gap-3"><FaPlus /> ADD PATIENT</button>
+                            <div className="w-full flex flex-col mb-5">
+                                <label>Lab Results</label>
+                                <textarea placeholder="Enter Lab Results" required className="p-3 pl-0 text-md border-2 border-gray-300 focus:border-[#489b42] duration-300 outline-none" id="name" value={labResults} onChange={(e)=> setLabResults(e.target.value)} />
+                            </div>
+                            <button type='submit' className="px-5 py-2 bg-green-500 text-lg font-light w-fit self-end mt-10 cursor-pointer text-white rounded-md flex items-center gap-3"><FaPlus /> ADD DOCUMENT</button>
                             {/* <Link target="_blank" className="self-end text-green-500 mt-8" href="https://www.markdownguide.org/cheat-sheet/">Markdown Guide</Link> */}
                         </form>
                     </div>

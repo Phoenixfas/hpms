@@ -21,9 +21,22 @@ const handler = async (req, res) => {
     } catch (error) {
       res.status(400).json({ message: 'Error creating appointment', error });
     }
-  } else {
-    res.status(405).json({ message: 'Method not allowed' });
+  }  else if (req.method === 'DELETE') {
+    const { id } = req.body;
+    try {
+      const ap = await Appointment.findById(id);
+      if (!ap) {
+        return res.status(404).json({ message: 'Appointment not found' });
+      }
+      await Appointment.findByIdAndDelete(id);
+      res.status(200).json({ message: 'Appointment deleted successfully' });
+    } catch (error) {
+      res.status(400).json({ message: 'Error deleting appointment', error });
+    }
   }
+  else {
+    res.status(405).json({ message: 'Method not allowed' });
+  } 
 };
 
 export default authMiddleware(handler);

@@ -4,19 +4,27 @@ import { RootState } from "../store";
 // define blog state as an object with name, image, type, content, and date
 export interface Package {
     _id: any;
-    name: string;
-    image: string;
-    description: string;
-    aglp: number;
+    patient: Object;
+    doctor: Object;
+    notes: string;
+    diagnosis: string;
+    treatmentPlan: string;
+    labResults: string;
+    createdAt: string;
+    updatedAt: string;
 }
 
 // define initial state
 const initialState: Package = {
     _id: "",
-    name: "",
-    image: "",
-    description: "",
-    aglp: 0,
+    patient: {},
+    doctor: {},
+    notes: "",
+    diagnosis: "",
+    treatmentPlan: "",
+    labResults: "",
+    createdAt: "",
+    updatedAt: "",
 };
 
 // create slice
@@ -29,10 +37,14 @@ export const activePackageSlice = createSlice({
         // @ts-ignore
         changeActivePackage: (state, action: PayloadAction<Package>) => {
             state._id = action.payload._id;
-            state.name = action.payload.name;
-            state.image = action.payload.image;
-            state.description = action.payload.description;
-            state.aglp = action.payload.aglp;
+            state.patient = action.payload.patient;
+            state.doctor = action.payload.doctor;
+            state.notes = action.payload.notes;
+            state.diagnosis = action.payload.diagnosis;
+            state.treatmentPlan = action.payload.treatmentPlan;
+            state.labResults = action.payload.labResults;
+            state.createdAt = action.payload.createdAt;
+            state.updatedAt = action.payload.updatedAt;
         },
     },
 });

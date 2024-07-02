@@ -7,6 +7,7 @@ import { FaWheelchair } from "react-icons/fa";
 import { FaUserDoctor, FaRegPenToSquare } from "react-icons/fa6";
 import { AiFillDashboard } from "react-icons/ai";
 import { IoCaretForward } from "react-icons/io5";
+import { IoDocumentTextOutline } from "react-icons/io5";
 
 export default function Sidebar() {
     const pathname = usePathname()
@@ -21,8 +22,8 @@ export default function Sidebar() {
             case '/patients':
                 setActive('patients')
                 break
-            case '/doctors':
-                setActive('doctors')
+            case '/clinical-documents':
+                setActive('clinical-documents')
                 break
             case '/appointments':
                 setActive('appointments')
@@ -48,19 +49,19 @@ export default function Sidebar() {
                     {isOpen && <p className='duration-300'>Dashboard</p>}
                 </div>
             </Link>
-            <Link href='/patients' onClick={() => setActive('blog')} title="blog">
+            <Link href='/patients' onClick={() => setActive('patients')} title="blog">
                 <div className={`flex h-12 rounded-lg duration-300 hover:bg-[#5AC5C8] ${active==='patients' ? 'bg-[#5AC5C8]' : ''} items-center text-white gap-5 ${isOpen ? "p-4" : ""}`}>
                     <FaWheelchair className={`${isOpen ? '' : 'flex-1'}`} size={20}/>
                     {isOpen && <p className='duration-300'>Patients</p>}
                 </div>
             </Link>
-            <Link href='/doctors' onClick={() => setActive('newsletter')} title="newsletter">
+            <Link href='/clinical-documents' onClick={() => setActive('clinical-documents')} title="newsletter">
                 <div className={`flex h-12 rounded-lg duration-300 hover:bg-[#5AC5C8] ${active==='doctors' ? 'bg-[#5AC5C8]' : ''} items-center text-white gap-5 ${isOpen ? "p-4" : ""}`}>
-                    <FaUserDoctor className={`${isOpen ? '' : 'flex-1'}`} size={20}/>
-                    {isOpen && <p className='duration-300'>Doctors</p>}
+                    <IoDocumentTextOutline className={`${isOpen ? '' : 'flex-1'}`} size={20}/>
+                    {isOpen && <p className='duration-300'>Clinical Documents</p>}
                 </div>
             </Link>
-            <Link href='/appointments' onClick={() => setActive('newsletter')} title="newsletter">
+            <Link href='/appointments' onClick={() => setActive('appointments')} title="newsletter">
                 <div className={`flex h-12 rounded-lg duration-300 hover:bg-[#5AC5C8] ${active==='appointments' ? 'bg-[#5AC5C8]' : ''} items-center text-white gap-5 ${isOpen ? "p-4" : ""}`}>
                     <FaRegPenToSquare className={`${isOpen ? '' : 'flex-1'}`} size={20}/>
                     {isOpen && <p className='duration-300'>Appointments</p>}
