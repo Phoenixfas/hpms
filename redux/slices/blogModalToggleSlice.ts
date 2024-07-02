@@ -25,6 +25,7 @@ export const blogModalToggleSlice = createSlice({
 export const { toggleBlogModal } = blogModalToggleSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
-export const selectBlogModalToggle = (state: RootState) => state.blogModalToggle.value;
+export const selectBlogModalToggle = (state: RootState) =>
+  state.blogModalToggle.value;
 
 export default blogModalToggleSlice.reducer;

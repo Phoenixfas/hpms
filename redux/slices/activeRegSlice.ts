@@ -2,18 +2,29 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 
 // define blog state as an object with title, image, desc, content, and date
+interface Product {
+    name: string;
+    image: string;
+}
 export interface Reg {
     _id: string;
     first_name: string;
     last_name: string;
+    company_name: string;
+    company_website: string;
     email: string;
+    job_title: string;
+    country: string;
+    region: string;
     phone: string;
-    telegram: string;
-    gender: string;
-    have_team: boolean;
-    previous_experience: boolean;
-    why_participate: string;
-    additional_info: string;
+    title: string;
+    logo: string;
+    description: string;
+    sectors: string[];
+    vendor_loc: string;
+    products: Product[];
+    videos: string[];
+    approved: boolean;
     createdAt: string;
     updatedAt: string;
 }
@@ -23,14 +34,21 @@ const initialState: Reg = {
     _id: "",
     first_name: "",
     last_name: "",
+    company_name: "",
+    company_website: "",
     email: "",
+    job_title: "",
+    country: "",
+    region: "",
     phone: "",
-    telegram: "",
-    gender: "",
-    have_team: false,
-    previous_experience: false,
-    why_participate: "",
-    additional_info: "",
+    title: "",
+    logo: "",
+    description: "",
+    sectors: [],
+    vendor_loc: "",
+    products: [],
+    videos: [],
+    approved: false,
     createdAt: "",
     updatedAt: "",
 };
@@ -47,14 +65,21 @@ export const activeRegSlice = createSlice({
             state._id = action.payload._id;
             state.first_name = action.payload.first_name;
             state.last_name = action.payload.last_name;
+            state.company_name = action.payload.company_name;
+            state.company_website = action.payload.company_website;
             state.email = action.payload.email;
+            state.job_title = action.payload.job_title;
+            state.country = action.payload.country;
+            state.region = action.payload.region;
             state.phone = action.payload.phone;
-            state.telegram = action.payload.telegram;
-            state.gender = action.payload.gender;
-            state.have_team = action.payload.have_team;
-            state.previous_experience = action.payload.previous_experience;
-            state.why_participate = action.payload.why_participate;
-            state.additional_info = action.payload.additional_info;
+            state.title = action.payload.title;
+            state.logo = action.payload.logo;
+            state.description = action.payload.description;
+            state.sectors = action.payload.sectors;
+            state.vendor_loc = action.payload.vendor_loc;
+            state.products = action.payload.products;
+            state.videos = action.payload.videos;
+            state.approved = action.payload.approved;
             state.createdAt = action.payload.createdAt;
             state.updatedAt = action.payload.updatedAt;
         },

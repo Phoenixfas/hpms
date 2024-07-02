@@ -35,14 +35,13 @@ export default function LoginForm() {
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data)
-            // if (data.success === false) {
-            //     setIsLoading(false)
-            //     setError(data.msg)
-            // } else {
-            //     setIsLoading(false)
-            //     dispatch(login(data.token))
-            // }
+            if (!data.token) {
+                setIsLoading(false)
+                setError(data.message)
+            } else {
+                setIsLoading(false)
+                dispatch(login(data.token))
+            }
         })
         .catch((err : any) => {
             setIsLoading(false)

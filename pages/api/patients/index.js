@@ -21,9 +21,22 @@ const handler = async (req, res) => {
     } catch (error) {
       res.status(400).json({ message: 'Error creating patient', error });
     }
-  } else {
-    res.status(405).json({ message: 'Method not allowed' });
-  }
-};
+  } else if (req.method === 'DELETE') {
+      const { id } = req.body;
+      try {
+        const patient = await Patient.findById(id);
+        if (!patient) {
+          return res.status(404).json({ message: 'Patient not found' });
+        }
+        await Patient.findByIdAndDelete(id);
+        res.status(200).json({ message: 'Patient deleted successfully' });
+      } catch (error) {
+        res.status(400).json({ message: 'Error deleting patient', error });
+      }
+    }
+    else {
+      res.status(405).json({ message: 'Method not allowed' });
+    } 
+}
 
 export default authMiddleware(handler);
