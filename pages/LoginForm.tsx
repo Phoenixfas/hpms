@@ -40,7 +40,7 @@ export default function LoginForm() {
                 setError(data.message)
             } else {
                 setIsLoading(false)
-                dispatch(login(data.token))
+                dispatch(login({admin: data.token, role: data.role}))
             }
         })
         .catch((err : any) => {

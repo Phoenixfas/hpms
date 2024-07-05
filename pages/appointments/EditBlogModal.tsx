@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect, use } from 'react'
 import Image from 'next/image'
 import { useAppSelector, useAppDispatch } from '../../redux/hooks'
 import { toggleBlogAddModal } from '../../redux/slices/blogAddModalToggleSlice'
@@ -8,6 +8,7 @@ import { FaPlus } from 'react-icons/fa'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import postReq from '../../hooks/postReq'
+import useFetch from '@/hooks/useFetch'
 // import { useMutation } from '@apollo/client'
 // import { GET_ARTICLES } from '../../graphql/queries/articleQueries'
 // import { ADD_ARTICLE } from '../../graphql/mutations/articleMutations'
@@ -24,6 +25,8 @@ export default function EditBlogModal() {
 
     const [err, setErr] = useState<any>("")
 
+    const [patients, setPatients] = useState<any>([])
+    const [doctors, setDoctors] = useState<any>([])
     const [patient, setPatient] = useState("")
     const [doctor, setADoctor] = useState("")
     const [notes, setNotes] = useState("")
@@ -31,6 +34,15 @@ export default function EditBlogModal() {
     
 
     const token = useAppSelector(state => state.login.admin)
+
+
+    const {data: pats} = useFetch('patients')
+    const {data: users} = useFetch('users')
+    useEffect(() => {
+        setPatients(pats)
+        setDoctors(users.filter((user: any) => user.role === "doctor"))
+    }, [pats, users])
+
     const addArticle = async (body: any) => {
         await postReq('appointments', body, token)
         window.location.reload()
@@ -76,12 +88,22 @@ export default function EditBlogModal() {
                         {err && <p className="text-red-500 text-center mb-5">{err}</p>}
                         <form onSubmit={onSubmit} className="flex flex-col">
                             <div className="w-full flex flex-col mb-5">
-                                <label>Patient Id</label>
-                                <input placeholder="Enter Patient id" required type="text" className="p-3 pl-0 text-md border-b-2 border-gray-300 focus:border-[#489b42] duration-300 outline-none" id="name" value={patient} onChange={(e)=> setPatient(e.target.value)} />
+                                <label>Patient</label>
+                                <select required className="p-3 pl-0 text-md border-b-2 border-gray-300 focus:border-[#489b42] duration-300 outline-none" id="name" onChange={(e)=> setPatient(e.target.value)}>
+                                    <option value="">Select Patient</option>
+                                    {patients.map((pat: any) => (
+                                        <option key={pat.id} value={pat._id}>{pat.name}</option>
+                                    ))}
+                                </select>
                             </div>
                             <div className="w-full flex flex-col mb-5">
-                                <label>Doctor Id</label>
-                                <input placeholder="Enter Doctor" required type="text" className="p-3 pl-0 text-md border-b-2 border-gray-300 focus:border-[#489b42] duration-300 outline-none" id="name" value={doctor} onChange={(e)=> setADoctor(e.target.value)} />
+                                <label>Doctor</label>
+                                <select required className="p-3 pl-0 text-md border-b-2 border-gray-300 focus:border-[#489b42] duration-300 outline-none" id="name" onChange={(e)=> setADoctor(e.target.value)}>
+                                    <option value="">Select Doctor</option>
+                                    {doctors.map((doc: any) => (
+                                        <option key={doc.id} value={doc._id}>{doc.username}</option>
+                                    ))}
+                                </select>
                             </div>
                             <div className="w-full flex flex-col mb-5">
                                 <label>Notes</label>

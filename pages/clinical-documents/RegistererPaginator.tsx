@@ -31,7 +31,7 @@ const Paginator = ({d}: RegistererPaginatorProps) => {
   
     const itemsPerPage = 12;
     const data = d
-    console.log(data)
+    // console.log(data)
   
     useEffect(() => {
   

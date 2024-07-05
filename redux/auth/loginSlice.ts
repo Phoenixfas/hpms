@@ -5,6 +5,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   admin: "",
+  role: "",
   value: false,
 };
 
@@ -14,11 +15,13 @@ const loginSlice = createSlice({
   reducers: {
     login: (state, actions) => {
       state.value = true;
-      state.admin = actions.payload;
+      state.admin = actions.payload.admin;
+      state.role = actions.payload.role;
     },
     logout: (state) => {
       state.value = false;
       state.admin = "";
+      state.role = "";
     }
   },
 });
