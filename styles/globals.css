@@ -5,7 +5,7 @@
 body{
   font-family: 'Roboto', sans-serif;
   background-color: #E3E6E9;
-  /* background: linear-gradient(to top right, #dddd19 0%, #489b42 80%, #0b5b05 100%); */
+  /* background: linear-gradient(to top right, #dddd19 0%, #489b42 80%, #04353D 100%); */
 }
 .header_admin{
   position: relative;
@@ -34,7 +34,7 @@ border-radius: .4em;
 }
 
 /* .heading{
-  background: linear-gradient(to top right, #dddd19 30%, #489b42 60%, #0b5b05 100%);
+  background: linear-gradient(to top right, #dddd19 30%, #489b42 60%, #04353D 100%);
   -webkit-background-clip: text;  
   -webkit-text-fill-color: transparent;
 
@@ -57,22 +57,22 @@ border-radius: .4em;
 .blog-modal-sanitized h1{
   margin-bottom: 10px;
   font-weight: 500;
-  color: #0b5b05;
+  color: #04353D;
 }
 .blog-modal-sanitized h2{
   margin-bottom: 10px;
   font-weight: 500;
-  color: #0b5b05;
+  color: #04353D;
 }
 .blog-modal-sanitized h3{
   margin-bottom: 10px;
   font-weight: 500;
-  color: #0b5b05;
+  color: #04353D;
 }
 .blog-modal-sanitized h4{
   margin-bottom: 10px;
   font-weight: 500;
-  color: #0b5b05;
+  color: #04353D;
 }
 /* //////////////////////////////////////////////////////////////////////////////////// */
 
@@ -103,7 +103,7 @@ border-radius: .4em;
   cursor: pointer;
 }
 .pagination__pageActive{
-  background-color: #489b42;
+  background-color: #04353D;
   color: #E3E6E9;
 }
 .pagination__pagePrev{
@@ -115,7 +115,7 @@ border-radius: .4em;
   font-size: 1.5rem;
   border-radius: 50%;
   margin-right: 30px;
-  background-color: #489b42;
+  background-color: #04353D;
   color: #E3E6E9;
   cursor: pointer;
 }
@@ -128,7 +128,7 @@ border-radius: .4em;
   font-size: 1.5rem;
   border-radius: 50%;
   margin-left: 30px;
-  background-color: #489b42;
+  background-color: #04353D;
   color: #E3E6E9;
   cursor: pointer;
 }
