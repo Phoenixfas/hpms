@@ -8,11 +8,13 @@ import { FaUserDoctor, FaRegPenToSquare } from "react-icons/fa6";
 import { AiFillDashboard } from "react-icons/ai";
 import { IoCaretForward } from "react-icons/io5";
 import { IoDocumentTextOutline } from "react-icons/io5";
+import { useAppSelector } from '@/redux/hooks'
 
 export default function Sidebar() {
     const pathname = usePathname()
     const [isOpen, setIsOpen] = useState(false)
     const [active, setActive] = useState('')
+    const role = useAppSelector(state => state.login.role)
 
     useEffect(() => {
         switch (pathname) {
@@ -49,24 +51,36 @@ export default function Sidebar() {
                     {isOpen && <p className='duration-300'>Dashboard</p>}
                 </div>
             </Link>
-            <Link href='/patients' onClick={() => setActive('patients')} title="blog">
+            {role === "nurse" && <Link href='/patients' onClick={() => setActive('patients')} title="blog">
                 <div className={`flex h-12 rounded-lg duration-300 hover:bg-[#5AC5C8] ${active==='patients' ? 'bg-[#5AC5C8]' : ''} items-center text-white gap-5 ${isOpen ? "p-4" : ""}`}>
                     <FaWheelchair className={`${isOpen ? '' : 'flex-1'}`} size={20}/>
                     {isOpen && <p className='duration-300'>Patients</p>}
                 </div>
-            </Link>
-            <Link href='/clinical-documents' onClick={() => setActive('clinical-documents')} title="newsletter">
+            </Link>}
+            {role === "admin" && <Link href='/patients' onClick={() => setActive('patients')} title="blog">
+                <div className={`flex h-12 rounded-lg duration-300 hover:bg-[#5AC5C8] ${active==='patients' ? 'bg-[#5AC5C8]' : ''} items-center text-white gap-5 ${isOpen ? "p-4" : ""}`}>
+                    <FaWheelchair className={`${isOpen ? '' : 'flex-1'}`} size={20}/>
+                    {isOpen && <p className='duration-300'>Patients</p>}
+                </div>
+            </Link>}
+            {role === "doctor" && <Link href='/clinical-documents' onClick={() => setActive('clinical-documents')} title="newsletter">
                 <div className={`flex h-12 rounded-lg duration-300 hover:bg-[#5AC5C8] ${active==='doctors' ? 'bg-[#5AC5C8]' : ''} items-center text-white gap-5 ${isOpen ? "p-4" : ""}`}>
                     <IoDocumentTextOutline className={`${isOpen ? '' : 'flex-1'}`} size={20}/>
                     {isOpen && <p className='duration-300'>Clinical Documents</p>}
                 </div>
-            </Link>
-            <Link href='/appointments' onClick={() => setActive('appointments')} title="newsletter">
+            </Link>}
+            {role === "admin" && <Link href='/clinical-documents' onClick={() => setActive('clinical-documents')} title="newsletter">
+                <div className={`flex h-12 rounded-lg duration-300 hover:bg-[#5AC5C8] ${active==='doctors' ? 'bg-[#5AC5C8]' : ''} items-center text-white gap-5 ${isOpen ? "p-4" : ""}`}>
+                    <IoDocumentTextOutline className={`${isOpen ? '' : 'flex-1'}`} size={20}/>
+                    {isOpen && <p className='duration-300'>Clinical Documents</p>}
+                </div>
+            </Link>}
+            {role === "admin" && <Link href='/appointments' onClick={() => setActive('appointments')} title="newsletter">
                 <div className={`flex h-12 rounded-lg duration-300 hover:bg-[#5AC5C8] ${active==='appointments' ? 'bg-[#5AC5C8]' : ''} items-center text-white gap-5 ${isOpen ? "p-4" : ""}`}>
                     <FaRegPenToSquare className={`${isOpen ? '' : 'flex-1'}`} size={20}/>
                     {isOpen && <p className='duration-300'>Appointments</p>}
                 </div>
-            </Link>
+            </Link>}
 
 
             
